@@ -12,47 +12,69 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CounterCubit>(
-      create: (_) => CounterCubit(),
-      child: BlocBuilder<CounterCubit, CounterState>(
-        builder: (context, state) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              appBar: AppBar(
-                title: const Text('Counter with Bloc'),
+      create: (context) => CounterCubit(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: CounterPage(),
+      ),
+    );
+  }
+}
+
+class CounterPage extends StatelessWidget {
+  const CounterPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter with Bloc'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          BlocConsumer<CounterCubit, CounterState>(
+            listener: (context, state) {
+              if (state.wasIncremented) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Incremented')),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('decremented')),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Text(
+                context.read<CounterCubit>().state.counterValue.toString(),
+                style: Theme.of(context).textTheme.displayMedium,
+              );
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  context.read<CounterCubit>().decrement();
+                },
+                tooltip: 'Decrement',
+                child: const Icon(Icons.remove),
               ),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      FloatingActionButton(
-                        onPressed: () {
-                          context.read<CounterCubit>().decrement();
-                        },
-                        tooltip: 'Decrement',
-                        child: const Icon(Icons.remove),
-                      ),
-                      FloatingActionButton(
-                        onPressed: () {
-                          // context.read<CounterCubit>().increment();
-                          BlocProvider.of<CounterCubit>(context).increment();
-                        },
-                        tooltip: 'Increment',
-                        child: const Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                ],
+              FloatingActionButton(
+                onPressed: () {
+                  // context.read<CounterCubit>().increment();
+                  BlocProvider.of<CounterCubit>(context).increment();
+                },
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ],
       ),
     );
   }
