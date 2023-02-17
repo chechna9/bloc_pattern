@@ -10,27 +10,19 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   final AppRouter _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: _appRouter.onGenerateRoute,
+    return BlocProvider(
+      create: (context) => CounterCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: _appRouter.onGenerateRoute,
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _appRouter.dispose();
-    super.dispose();
   }
 }

@@ -17,6 +17,7 @@ class ThirdScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        backgroundColor: color,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -49,6 +50,7 @@ class ThirdScreen extends StatelessWidget {
                   context.read<CounterCubit>().decrement();
                 },
                 tooltip: 'Decrement',
+                backgroundColor: color,
                 child: const Icon(Icons.remove),
               ),
               FloatingActionButton(
@@ -58,6 +60,7 @@ class ThirdScreen extends StatelessWidget {
                   BlocProvider.of<CounterCubit>(context).increment();
                 },
                 tooltip: 'Increment',
+                backgroundColor: color,
                 child: const Icon(Icons.add),
               ),
             ],

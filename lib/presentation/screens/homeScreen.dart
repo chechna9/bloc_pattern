@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
                   context.read<CounterCubit>().decrement();
                 },
                 tooltip: 'Decrement',
+                backgroundColor: color,
                 child: const Icon(Icons.remove),
               ),
               FloatingActionButton(
@@ -58,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                   BlocProvider.of<CounterCubit>(context).increment();
                 },
                 tooltip: 'Increment',
+                backgroundColor: color,
                 child: const Icon(Icons.add),
               ),
             ],
@@ -69,7 +71,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed('/second');
             },
-            color: color,
+            color: Colors.redAccent,
             child: const Text(
               'Go to Second Screen',
               style: TextStyle(

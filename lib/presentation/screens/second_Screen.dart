@@ -17,6 +17,7 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: color,
         title: Text(title),
       ),
       body: Column(
@@ -50,6 +51,7 @@ class SecondScreen extends StatelessWidget {
                   context.read<CounterCubit>().decrement();
                 },
                 tooltip: 'Decrement',
+                backgroundColor: color,
                 child: const Icon(Icons.remove),
               ),
               FloatingActionButton(
@@ -59,6 +61,7 @@ class SecondScreen extends StatelessWidget {
                   BlocProvider.of<CounterCubit>(context).increment();
                 },
                 tooltip: 'Increment',
+                backgroundColor: color,
                 child: const Icon(Icons.add),
               ),
             ],
