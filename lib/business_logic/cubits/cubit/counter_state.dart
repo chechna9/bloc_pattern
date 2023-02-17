@@ -6,6 +6,5 @@ class CounterState extends Equatable {
   CounterState({required this.counterValue, required this.wasIncremented});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [counterValue, wasIncremented];
 }
