@@ -1,4 +1,4 @@
-import 'package:bloc_pattern_course/business_logic/cubits/cubit/counter_cubit.dart';
+import 'package:bloc_pattern_course/business_logic/cubits/counter_cubit/counter_cubit.dart';
 import 'package:bloc_pattern_course/presentation/screens/second_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

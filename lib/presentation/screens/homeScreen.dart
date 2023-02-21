@@ -1,4 +1,6 @@
-import 'package:bloc_pattern_course/business_logic/cubits/cubit/counter_cubit.dart';
+import 'package:bloc_pattern_course/business_logic/cubits/counter_cubit/counter_cubit.dart';
+import 'package:bloc_pattern_course/business_logic/cubits/internet_cubit/cubit/cubit/internet_cubit.dart';
+import 'package:bloc_pattern_course/constants/enums.dart';
 import 'package:bloc_pattern_course/presentation/screens/second_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,30 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          BlocBuilder<InternetCubit, InternetState>(
+            builder: (context, state) {
+              if (state is InternetConnected &&
+                  state.connectionType == ConnectionType.wifi) {
+                return Text(
+                  'Wifi',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                );
+              } else if (state is InternetConnected &&
+                  state.connectionType == ConnectionType.mobile) {
+                return Text(
+                  'Mobile',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                );
+              } else if (state is InternetDisconnected) {
+                return Text(
+                  'Disconnted',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
           BlocConsumer<CounterCubit, CounterState>(
             listener: (context, state) {
               if (state.wasIncremented) {

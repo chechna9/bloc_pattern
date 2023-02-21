@@ -1,4 +1,4 @@
-import 'package:bloc_pattern_course/business_logic/cubits/cubit/counter_cubit.dart';
+import 'package:bloc_pattern_course/business_logic/cubits/counter_cubit/counter_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
